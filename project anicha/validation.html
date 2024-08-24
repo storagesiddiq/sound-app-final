@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="validation.css">
+    <title>Authentication</title>
+</head>
+<body>
+<div class="container" id="signup-container">
+    <h2>Signup</h2>
+    <div class="form-group">
+        <label for="signup-username">Username:</label>
+        <input type="text" id="signup-username">
+    </div>
+    <div class="form-group">
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password">
+    </div>
+    <button class="button" onclick="signup()">Signup</button>
+</div>
+
+<div class="container" id="login-container" style="display: none;">
+    <h2>Login</h2>
+    <div class="form-group">
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username">
+    </div>
+    <div class="form-group">
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password">
+    </div>
+    <button class="button" onclick="login()">Login</button>
+</div>
+
+<button class="button" onclick="logout()">Logout</button>
+
+<script>
+    function signup() {
+        const username = document.getElementById('signup-username').value;
+        const password = document.getElementById('signup-password').value;
+
+        if (username && password) {
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            alert('Signup successful!');
+            showLogin();
+        } else {
+            alert('Please fill in both fields.');
+        }
+    }
+
+    function login() {
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
+
+        const storedUsername = localStorage.getItem('username');
+        const storedPassword = localStorage.getItem('password');
+
+        if (username === storedUsername && password === storedPassword) {
+            localStorage.setItem('loggedIn', 'true');
+            window.location.href = 'index.html';
+        } else {
+            alert('Invalid username or password.');
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem('loggedIn');
+        showLogin();
+    }
+
+    function showLogin() {
+        document.getElementById('signup-container').style.display = 'none';
+        document.getElementById('login-container').style.display = 'block';
+    }
+
+    function showSignup() {
+        document.getElementById('signup-container').style.display = 'block';
+        document.getElementById('login-container').style.display = 'none';
+    }
+
+    // Show the appropriate container based on the login status
+    if (localStorage.getItem('loggedIn') === 'true') {
+        window.location.href ='index.html';
+    } else {
+        showSignup();
+    }
+</script>
+
+</body>
+</html>

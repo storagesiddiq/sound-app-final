@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <link rel="stylesheet" href="index1.css">
+    <link rel="stylesheet" href="sw.js">
+    <link rel="stylesheet" href="androidmainfest.xml">
+</head>
+<body>
+    <div class="container">
+        <audio controls class="audio-player">
+            <source src="song.mp3" type="audio/mpeg">
+             Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="container">
+        <audio controls class="audio-player">
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="container">
+        <audio controls class="audio-player">
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="container">
+        <audio controls class="audio-player">
+            <source src="song.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <div class="container">
+    <button class="button" onclick="logout()">Logout</button>
+    </div>
+    <script>
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'validation.html';  // Redirect to the login page
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(error) {
+                console.log('ServiceWorker registration failed: ', error);
+            });
+        }
+    </script>
+</body>
+</html>
